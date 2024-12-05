@@ -9,77 +9,93 @@ from utils.plot_prices import plot_prices
 
 
 def main():
-    allOfArgs = [
+    # Define command line arguments
+    cli_args = [
         {
-            "name":"--coin",
-            "type":str,
-            "help":"Cryptocurrency symbol. For example: BTC (Bitcoin), ETH (Ethereum)"
+            "name": "--coin",
+            "type": str,
+            "help": "Cryptocurrency symbol. For example: BTC (Bitcoin), ETH (Ethereum)"
         },
         {
-            "name":"--time",
-            "type":str,
-            "help":"Analyse time. For example: lw (last week), lm (last month)"
+            "name": "--time", 
+            "type": str,
+            "help": "Analyse time. For example: lw (last week), lm (last month)"
         },
     ]
 
-    args = cli_tool(*allOfArgs, description="Simple cryptocurrency analysis")
+    args = cli_tool(*cli_args, description="Simple cryptocurrency analysis")
 
-    listOfCoin = {
+    # Define supported cryptocurrencies
+    supported_coins = {
         "BTC": "bitcoin",
-        "ETH": "ethereum",
+        "ETH": "ethereum", 
         "BNB": "binancecoin",
         "SOL": "solana"
     }
 
-    listOfTime = {
+    # Define time period options
+    time_periods = {
         "lw": 7,
         "lm": 30,
     }
 
-    prices = get_data_coingecko_API(listOfCoin[args.coin], listOfTime[args.time])
+    # Get price data
+    prices = get_data_coingecko_API(supported_coins[args.coin], time_periods[args.time])
 
     if prices is not None:
-        # Convert to DataFrame for easier handling
-        df = pd.DataFrame(prices, columns=["timestamp", "price"])
+        # Create and process dataframe
+        df = process_price_data(prices)
+        
+        # Display price information
+        display_price_info(df, supported_coins[args.coin], time_periods[args.time])
+        
+        # Save data to CSV
+        save_to_csv(df, args.coin)
+        
+        # Generate and save price plot
+        save_price_plot(df, args.coin, supported_coins[args.coin], time_periods[args.time])
 
-        # Convert timestamp to datetime
-        df["date"] = pd.to_datetime(df["timestamp"], unit="ms")
 
-        # Clean up the DataFrame
-        df = df.drop("timestamp", axis=1)
-        df = df.set_index("date")
+def process_price_data(prices):
+    df = pd.DataFrame(prices, columns=["timestamp", "price"])
+    df["date"] = pd.to_datetime(df["timestamp"], unit="ms")
+    df = df.drop("timestamp", axis=1)
+    return df.set_index("date")
 
-        # Display the results
-        print(f"\n{listOfCoin[args.coin].title()} Prices (Last {listOfTime[args.time]} Days):")
-        print("-----------------------------")
 
-        # Resample to daily data (taking the mean price for each day)
-        daily_prices = df.resample("D").mean()
+def display_price_info(df, coin_name, time_period):
+    print(f"\n{coin_name.title()} Prices (Last {time_period} Days):")
+    print("-----------------------------")
 
-        for date, row in daily_prices.iterrows():
-            print(f"{date.strftime("%Y-%m-%d")}: ${row["price"]:,.2f}")
+    daily_prices = df.resample("D").mean()
+    for date, row in daily_prices.iterrows():
+        print(f"{date.strftime('%Y-%m-%d')}: ${row['price']:,.2f}")
 
-        # Calculate some basic statistics
-        print("\nSummary Statistics:")
-        print(f"Highest Price: ${df["price"].max():,.2f}")
-        print(f"Lowest Price: ${df["price"].min():,.2f}")
-        print(f"Average Price: ${df["price"].mean():,.2f}")
-        print(f"Price Change: ${(df["price"].iloc[-1] - df["price"].iloc[0]):,.2f}")
+    print("\nSummary Statistics:")
+    print(f"Highest Price: ${df['price'].max():,.2f}")
+    print(f"Lowest Price: ${df['price'].min():,.2f}")
+    print(f"Average Price: ${df['price'].mean():,.2f}")
+    print(f"Price Change: ${(df['price'].iloc[-1] - df['price'].iloc[0]):,.2f}")
+    print("\n-----------------------------")
 
-        print("\n-----------------------------")
-        df.to_csv(f"{args.coin}_prices.csv")
-        print(f"Data saved to {args.coin}_prices.csv")
 
-        # Create and save the plot
-        print("\n-----------------------------")
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"{args.coin}_prices_{timestamp}.png"
-        file_information = {
-            "coin":listOfCoin[args.coin].title(),
-            "time":listOfTime[args.time]
-        }
-        saved_file = plot_prices(df, filename, file_information)
-        print(f"Plot saved as: {saved_file}")
+def save_to_csv(df, coin_symbol):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{coin_symbol}_prices_{timestamp}.csv"
+    df.to_csv(filename)
+    print(f"Data saved to {filename}")
+
+
+def save_price_plot(df, coin_symbol, coin_name, time_period):
+    print("\n-----------------------------")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{coin_symbol}_prices_{timestamp}.png"
+    file_information = {
+        "coin": coin_name.title(),
+        "time": time_period
+    }
+    saved_file = plot_prices(df, filename, file_information)
+    print(f"Plot saved as: {saved_file}")
 
 
 def get_data_coingecko_API(coin, time):
