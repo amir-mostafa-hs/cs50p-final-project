@@ -57,11 +57,25 @@ def main():
 
 
 def process_price_data(prices):
-    df = pd.DataFrame(prices, columns=["timestamp", "price"])
-    df["date"] = pd.to_datetime(df["timestamp"], unit="ms")
-    df = df.drop("timestamp", axis=1)
-    return df.set_index("date")
+    """
+    Process raw price data into a pandas DataFrame with datetime index.
 
+    Args:
+        prices (list): List of timestamp-price pairs from the CoinGecko API.
+            Each pair contains [timestamp in milliseconds, price in USD]
+
+    Returns:
+        pandas.DataFrame: DataFrame with datetime index and price column.
+            The timestamp column is converted to datetime and set as index.
+    """
+    # Create DataFrame from prices list with timestamp and price columns
+    df = pd.DataFrame(prices, columns=["timestamp", "price"])
+    # Convert timestamp column to datetime format
+    df["date"] = pd.to_datetime(df["timestamp"], unit="ms")
+    # Remove the original timestamp column since we now have date
+    df = df.drop("timestamp", axis=1)
+    # Set the date column as the index and return the DataFrame
+    return df.set_index("date")
 
 def display_price_info(df, coin_name, time_period):
     print(f"\n{coin_name.title()} Prices (Last {time_period} Days):")
@@ -141,30 +155,6 @@ def get_data_coingecko_API(coin, time):
         # Handle any API request errors by printing message and returning None
         print(f"Error fetching data: {e}")
         return None
-
-
-
-def analyze_data(data):
-    """
-    Convert raw cryptocurrency price data into a formatted pandas DataFrame.
-
-    Args:
-        data (list): List of timestamp-price pairs from the CoinGecko API.
-
-    Returns:
-        pandas.DataFrame: DataFrame with datetime index and price column, with timestamp column dropped.
-    """
-    # Create a pandas DataFrame with timestamp and price columns from the input data
-    df = pd.DataFrame(data, columns=["timestamp", "price"])
-
-    # Convert timestamp column to datetime format using milliseconds as the unit
-    df["date"] = pd.to_datetime(df["timestamp"], unit="ms")
-    # Remove the original timestamp column since we now have the date column
-    df = df.drop("timestamp", axis=1)
-    # Set the date column as the index of the DataFrame
-    df = df.set_index("date")
-
-    return df
 
 
 
