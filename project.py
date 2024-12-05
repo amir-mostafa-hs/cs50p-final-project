@@ -117,9 +117,24 @@ def display_price_info(df, coin_name, time_period):
 
 
 def save_to_csv(df, coin_symbol):
+    """
+    Save cryptocurrency price data to a CSV file with timestamped filename.
+
+    Args:
+        df (pandas.DataFrame): DataFrame containing price data with datetime index
+            and 'price' column
+        coin_symbol (str): Symbol of the cryptocurrency (e.g. 'BTC', 'ETH')
+
+    The filename is generated using the coin symbol and current timestamp in the format:
+    {coin_symbol}_prices_{YYYYMMDD_HHMMSS}.csv
+    """
+    # Get current timestamp for filename
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    # Generate filename with coin symbol and timestamp
     filename = f"{coin_symbol}_prices_{timestamp}.csv"
+    # Save DataFrame to CSV file
     df.to_csv(filename)
+    # Print confirmation message
     print(f"Data saved to {filename}")
 
 
