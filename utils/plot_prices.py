@@ -1,40 +1,42 @@
 import matplotlib.pyplot as plt
 
-def plot_btc_prices(df, filename='bitcoin_prices.png'):
+def plot_prices(df, filename="prices.png", info={"coin":"", "time":""}):
     """
-    Create and save a plot of Bitcoin prices
+    Create and save a line plot of price data over time.
 
     Args:
-        df: DataFrame with price data
-        filename: Name of the file to save the plot (default: 'bitcoin_prices.png')
+        df (pandas.DataFrame): DataFrame containing price data with datetime index and 'price' column
+        filename (str, optional): Output filename for the saved plot. Defaults to "prices.png"
+        info (dict, optional): Dictionary containing plot info with keys 'coin' and 'time'. Defaults to {"coin":"", "time":""}
+
+    Returns:
+        str: The filename of the saved plot
+
+    The function creates a line plot showing price over time with:
+    - Blue line for price data
+    - Grid lines
+    - Formatted y-axis labels with dollar signs
+    - Rotated x-axis date labels
+    - Title showing coin name and time period
     """
-    # Create the plot
     plt.figure(figsize=(12, 6))
 
-    # Plot the price data
-    plt.plot(df.index, df['price'], color='blue', linewidth=2)
+    plt.plot(df.index, df["price"], color="blue", linewidth=2)
 
-    # Customize the plot
-    plt.title('Bitcoin Price Last 7 Days', fontsize=14, pad=20)
-    plt.xlabel('Date', fontsize=12)
-    plt.ylabel('Price (USD)', fontsize=12)
+    plt.title(f"{info["coin"]} Price Last {info["time"]} Days", fontsize=14, pad=20)
+    plt.xlabel("Date", fontsize=12)
+    plt.ylabel("Price (USD)", fontsize=12)
 
-    # Add grid
-    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.grid(True, linestyle="--", alpha=0.7)
 
-    # Rotate x-axis labels for better readability
     plt.xticks(rotation=45)
 
-    # Add thousand separator to y-axis
-    plt.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x:,.0f}'))
+    plt.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f"${x:,.0f}"))
 
-    # Adjust layout to prevent label cutoff
     plt.tight_layout()
 
-    # Save the plot
-    plt.savefig(filename, dpi=300, bbox_inches='tight')
+    plt.savefig(filename, dpi=300, bbox_inches="tight")
 
-    # Close the plot to free memory
     plt.close()
 
     return filename

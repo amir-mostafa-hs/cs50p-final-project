@@ -5,7 +5,7 @@ from datetime import datetime
 from utils.fetch_api import fetch_api
 from utils.time_interval_calculator import time_interval_calculator
 from utils.cli_tool import cli_tool
-from utils.plot_prices import plot_btc_prices
+from utils.plot_prices import plot_prices
 
 
 def main():
@@ -74,7 +74,11 @@ def main():
         print("\n-----------------------------")
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f'{args.coin}_prices_{timestamp}.png'
-        saved_file = plot_btc_prices(df, filename)
+        file_information = {
+            "coin":listOfCoin[args.coin].title(),
+            "time":listOfTime[args.time]
+        }
+        saved_file = plot_prices(df, filename, file_information)
         print(f"Plot saved as: {saved_file}")
 
 
