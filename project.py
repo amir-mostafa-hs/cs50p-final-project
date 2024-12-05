@@ -22,7 +22,7 @@ def main():
         },
     ]
 
-    args = cli_tool(*allOfArgs,description="Simple cryptocurrency analysis")
+    args = cli_tool(*allOfArgs, description="Simple cryptocurrency analysis")
 
     listOfCoin = {
         "BTC": "bitcoin",
@@ -111,13 +111,23 @@ def get_data_coingecko_API(coin, time):
 
 
 def analyze_data(data):
-    # Convert to DataFrame for easier handling
+    """
+    Convert raw cryptocurrency price data into a formatted pandas DataFrame.
+
+    Args:
+        data (list): List of timestamp-price pairs from the CoinGecko API.
+
+    Returns:
+        pandas.DataFrame: DataFrame with datetime index and price column, with timestamp column dropped.
+    """
+    # Create a pandas DataFrame with timestamp and price columns from the input data
     df = pd.DataFrame(data, columns=['timestamp', 'price'])
 
-    # Convert timestamp to datetime
+    # Convert timestamp column to datetime format using milliseconds as the unit
     df['date'] = pd.to_datetime(df['timestamp'], unit='ms')
-    # Clean up the DataFrame
+    # Remove the original timestamp column since we now have the date column
     df = df.drop('timestamp', axis=1)
+    # Set the date column as the index of the DataFrame
     df = df.set_index('date')
 
     return df
