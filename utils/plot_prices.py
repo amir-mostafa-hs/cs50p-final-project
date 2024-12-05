@@ -5,9 +5,9 @@ def plot_prices(df, filename="prices.png", info={"coin":"", "time":""}):
     Create and save a line plot of price data over time.
 
     Args:
-        df (pandas.DataFrame): DataFrame containing price data with datetime index and 'price' column
+        df (pandas.DataFrame): DataFrame containing price data with datetime index and "price" column
         filename (str, optional): Output filename for the saved plot. Defaults to "prices.png"
-        info (dict, optional): Dictionary containing plot info with keys 'coin' and 'time'. Defaults to {"coin":"", "time":""}
+        info (dict, optional): Dictionary containing plot info with keys "coin" and "time". Defaults to {"coin":"", "time":""}
 
     Returns:
         str: The filename of the saved plot

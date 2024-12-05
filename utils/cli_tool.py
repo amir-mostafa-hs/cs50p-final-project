@@ -6,7 +6,7 @@ def cli_tool(*args, description=""):
     
     Args:
         *args: Variable length list of dictionaries containing argument specifications.
-              Each dictionary should have 'name', 'type' and 'help' keys.
+              Each dictionary should have "name", "type" and "help" keys.
         description (str): Description of the command line tool. Defaults to empty string.
     
     Returns:
