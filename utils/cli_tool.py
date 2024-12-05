@@ -18,11 +18,15 @@ def cli_tool(*args, description=""):
             {"name": "--output", "type": str, "help": "Output file path"},
             description="A file processing tool")
     """
+    # Create an ArgumentParser instance with the provided description
     parser = ArgumentParser(description=description)
 
+    # Iterate through each argument specification and add it to the parser
     for arg in args:
         parser.add_argument(arg["name"], type=arg["type"], help=arg["help"])
 
+    # Parse the command line arguments
     args = parser.parse_args()
 
+    # Return the parsed arguments
     return args
