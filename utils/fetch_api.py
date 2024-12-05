@@ -39,7 +39,7 @@ def fetch_api(endpoint, params={}):
             raise RequestException(f"HTTP error occurred: {http_err}")
 
     except ConnectionError as conn_err:
-        # Handle connection errors (DNS failures, refused connections, etc)
+        # Handle connection errors
         raise RequestException(f"Error connecting to server: {conn_err}")
 
     except Timeout as timeout_err:
