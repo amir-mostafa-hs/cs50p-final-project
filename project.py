@@ -77,19 +77,42 @@ def process_price_data(prices):
     # Set the date column as the index and return the DataFrame
     return df.set_index("date")
 
+
 def display_price_info(df, coin_name, time_period):
+    """
+    Display daily cryptocurrency prices and summary statistics.
+
+    Args:
+        df (pandas.DataFrame): DataFrame containing price data with datetime index
+            and 'price' column
+        coin_name (str): Name of the cryptocurrency
+        time_period (int): Number of days of data being displayed
+
+    Prints:
+        - Daily average prices for each date
+        - Summary statistics including:
+            - Highest price
+            - Lowest price 
+            - Average price
+            - Total price change
+    """
+    # Print header with coin name and time period
     print(f"\n{coin_name.title()} Prices (Last {time_period} Days):")
     print("-----------------------------")
 
+    # Calculate and display daily average prices
     daily_prices = df.resample("D").mean()
     for date, row in daily_prices.iterrows():
         print(f"{date.strftime('%Y-%m-%d')}: ${row['price']:,.2f}")
 
+    # Print summary statistics section header
     print("\nSummary Statistics:")
+    # Calculate and display key price metrics
     print(f"Highest Price: ${df['price'].max():,.2f}")
     print(f"Lowest Price: ${df['price'].min():,.2f}")
     print(f"Average Price: ${df['price'].mean():,.2f}")
     print(f"Price Change: ${(df['price'].iloc[-1] - df['price'].iloc[0]):,.2f}")
+    # Print footer separator
     print("\n-----------------------------")
 
 
