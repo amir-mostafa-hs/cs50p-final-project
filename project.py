@@ -139,14 +139,38 @@ def save_to_csv(df, coin_symbol):
 
 
 def save_price_plot(df, coin_symbol, coin_name, time_period):
+    """
+    Generate and save a price plot for cryptocurrency data.
+
+    Args:
+        df (pandas.DataFrame): DataFrame containing price data with datetime index
+            and 'price' column
+        coin_symbol (str): Symbol of the cryptocurrency (e.g. 'BTC', 'ETH')
+        coin_name (str): Full name of the cryptocurrency (e.g. 'bitcoin', 'ethereum')
+        time_period (int): Number of days of data being plotted
+
+    The plot is saved as a PNG file with a timestamped filename in the format:
+    {coin_symbol}_prices_{YYYYMMDD_HHMMSS}.png
+    """
+    # Print separator line
     print("\n-----------------------------")
+    
+    # Generate timestamp for unique filename
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Create filename using coin symbol and timestamp
     filename = f"{coin_symbol}_prices_{timestamp}.png"
+    
+    # Prepare plot information dictionary
     file_information = {
         "coin": coin_name.title(),
         "time": time_period
     }
+    
+    # Generate and save the plot, get saved filename
     saved_file = plot_prices(df, filename, file_information)
+    
+    # Print confirmation message with saved filename
     print(f"Plot saved as: {saved_file}")
 
 
