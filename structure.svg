@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+    <!-- Background -->
+    <!-- <rect width="800" height="450" fill="#f8f9fa"/> -->
+    
+    <!-- Project Title -->
+    <text x="20" y="40" font-family="Arial" font-size="18" font-weight="bold" fill="#20dd20">cryptocurrency-price-analyzer/</text>
+
+    <!-- Main Files -->
+    <g transform="translate(50, 70)">
+        <!-- project.py -->
+        <rect x="0" y="0" width="200" height="30" rx="5" fill="#2020dd"/>
+        <text x="10" y="20" font-family="Arial" font-size="14" fill="white">project.py</text>
+        <text x="220" y="20" font-family="Arial" font-size="12" fill="#20dd20"># Main application file</text>
+
+        <!-- requirements.txt -->
+        <rect x="0" y="40" width="200" height="30" rx="5" fill="#2020dd"/>
+        <text x="10" y="60" font-family="Arial" font-size="14" fill="white">requirements.txt</text>
+        <text x="220" y="60" font-family="Arial" font-size="12" fill="#20dd20"># Project dependencies</text>
+    </g>
+
+    <!-- Utils Folder -->
+    <g transform="translate(55, 160)">
+        <text x="0" y="0" font-family="Arial" font-size="16" font-weight="bold" fill="#20dd20">utils/</text>
+        
+        <!-- Utils Files -->
+        <g transform="translate(20, 20)">
+            <!-- fetch_api.py -->
+            <rect x="0" y="0" width="200" height="30" rx="5" fill="#dd20dd"/>
+            <text x="10" y="20" font-family="Arial" font-size="14" fill="white">fetch_api.py</text>
+            <text x="220" y="20" font-family="Arial" font-size="12" fill="#20dd20"># API handling utilities</text>
+
+            <!-- time_interval_calculator.py -->
+            <rect x="0" y="40" width="200" height="30" rx="5" fill="#dd20dd"/>
+            <text x="10" y="60" font-family="Arial" font-size="14" fill="white">time_interval_calculator.py</text>
+            <text x="220" y="60" font-family="Arial" font-size="12" fill="#20dd20"># Time calculation utilities</text>
+
+            <!-- cli_tool.py -->
+            <rect x="0" y="80" width="200" height="30" rx="5" fill="#dd20dd"/>
+            <text x="10" y="100" font-family="Arial" font-size="14" fill="white">cli_tool.py</text>
+            <text x="220" y="100" font-family="Arial" font-size="12" fill="#20dd20"># Command line interface tools</text>
+
+            <!-- plot_prices.py -->
+            <rect x="0" y="120" width="200" height="30" rx="5" fill="#dd20dd"/>
+            <text x="10" y="140" font-family="Arial" font-size="14" fill="white">plot_prices.py</text>
+            <text x="220" y="140" font-family="Arial" font-size="12" fill="#20dd20"># Data visualization utilities</text>
+        </g>
+    </g>
+
+    <!-- Tests Folder -->
+    <g transform="translate(55, 355)">
+        <text x="0" y="0" font-family="Arial" font-size="16" font-weight="bold" fill="#20dd20">tests/</text>
+        
+        <!-- Test File -->
+        <g transform="translate(20, 20)">
+            <rect x="0" y="0" width="200" height="30" rx="5" fill="#dd2020"/>
+            <text x="10" y="20" font-family="Arial" font-size="14" fill="white">test_project.py</text>
+            <text x="220" y="20" font-family="Arial" font-size="12" fill="#20dd20"># Test suite</text>
+        </g>
+    </g>
+
+    <!-- Connect lines -->
+    <g stroke="#010000" stroke-width="2">
+        <!-- Main vertical line -->
+        <line x1="40" y1="50" x2="40" y2="350"/>
+        
+        <!-- Horizontal lines to main files -->
+        <line x1="40" y1="85" x2="50" y2="85"/>
+        <line x1="40" y1="125" x2="50" y2="125"/>
+        
+        <!-- Lines to folders -->
+        <line x1="40" y1="155" x2="50" y2="155"/>
+        <line x1="40" y1="350" x2="50" y2="350"/>
+        
+        <!-- Utils vertical line -->
+        <line x1="60" y1="165" x2="60" y2="315"/>
+        
+        <!-- Utils horizontal lines -->
+        <line x1="60" y1="195" x2="70" y2="195"/>
+        <line x1="60" y1="235" x2="70" y2="235"/>
+        <line x1="60" y1="275" x2="70" y2="275"/>
+        <line x1="60" y1="315" x2="70" y2="315"/>
+        
+        <!-- Tests vertical line -->
+        <line x1="60" y1="360" x2="60" y2="390"/>
+        
+        <!-- Tests horizontal line -->
+        <line x1="60" y1="390" x2="70" y2="390"/>
+    </g>
+</svg>
