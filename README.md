@@ -1,6 +1,6 @@
 # Cryptocurrency Price Analyzer
 
-#### Video Demo: <URL HERE>
+#### Video Demo: [YouTube](https://www.youtube.com/watch?v=xIlWlMrUtAI)
 
 A command-line tool that fetches and analyzes cryptocurrency price data using the CoinGecko API. This tool allows users to view price trends, generate visualizations, and save historical price data for popular cryptocurrencies like Bitcoin (BTC), Ethereum (ETH), Binance Coin (BNB), and Solana (SOL).
 
