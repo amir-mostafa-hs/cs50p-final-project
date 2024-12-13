@@ -133,3 +133,7 @@ The program generates two types of output files:
 ## Contributing
 
 Feel free to fork this repository and submit pull requests for any improvements.
+
+## Project Presentation
+
+[Google Slides](https://docs.google.com/presentation/d/1Ny6-qMdJylVWpBqw1hXFcd-DK_Cvkqcflmh-0H5VHg4/edit?usp=sharing)
