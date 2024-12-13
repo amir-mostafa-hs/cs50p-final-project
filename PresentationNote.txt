@@ -1,0 +1,45 @@
+S1: Hello everyone! I'm Amir Mostafa Haji Sadeghian, and today I'm excited to present my final project for Harvard's CS50P course - a Cryptocurrency Price Analyzer.
+
+
+S2: This command-line tool helps users analyze cryptocurrency prices using the CoinGecko API. It provides real-time price analysis, visualizations, and data export for Bitcoin, Ethereum, Binance Coin, and Solana.
+
+
+S3: The project uses key libraries from CS50P like 'requests' for API calls and 'pandas' for data processing. I've also implemented command-line arguments and added matplotlib for visualizations and pytest for testing.
+
+
+S4: The project is organized into core components:
+- A main script handling core functionality
+- Utility modules for API fetching, time calculations, and plotting
+- And a test suite for code verification
+
+This modular approach keeps our code clean and organized.
+
+
+S5: Let me show you how it works. We use a simple command:
+`python project.py` followed by two arguments:
+--coin for selecting your cryptocurrency
+and --time for choosing your analysis period
+
+
+S6: For example, if we run 'python project.py --coin BTC --time lw', the program will:
+1. Fetch Bitcoin's last week prices
+2. Show price statistics
+3. Generate a price chart
+4. And save data in CSV and PNG formats
+
+Let me demonstrate this...
+[Here you can show the actual command execution]
+
+
+Next: As you can see, the program provides:
+- Daily price information
+- Key statistics like highest and lowest prices
+- A clear visualization of the price trend
+- And automatically saved files for further analysis
+
+
+S7: Thank you for watching! - This project showcases practical applications of CS50P concepts. Thank you, Professor David Malan and the CS50 team, for this amazing learning experience.
+
+If you're interested in trying it yourself, you can find the complete code and documentation in my GitHub repository.
+
+This is Amir Mostafa Haji Sadeghian, and this was CS50P!
